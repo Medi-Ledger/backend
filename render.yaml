@@ -1,0 +1,22 @@
+databases:
+  - name: megafuse-database
+    databaseName: megafuse
+    user: megafuse
+
+services:
+  - type: web
+    name: megafuse-backend
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn megafuse_core.wsgi:application -t 1800 --keep-alive 1800"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.6
+      - key: DATABASE_URL
+        fromDatabase:
+          name: megafuse-database
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
