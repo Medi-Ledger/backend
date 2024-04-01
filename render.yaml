@@ -1,0 +1,26 @@
+databases:
+  - name: mediledger-db
+    databaseName: mediledger
+    user: mediledger
+
+services:
+  - type: web
+    name: mediledger
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn main.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.6
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mediledger-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+    disk:
+      name: Media
+      mountPath: /var/data/media
+      sizeGB: 1
