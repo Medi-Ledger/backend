@@ -1,11 +1,13 @@
 databases:
   - name: mediledger-db
+    plan: free
     databaseName: mediledger
     user: mediledger
 
 services:
   - type: web
     name: mediledger
+    plan: free
     runtime: python
     buildCommand: "./build.sh"
     startCommand: "gunicorn main.wsgi:application"
