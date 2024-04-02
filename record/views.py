@@ -27,7 +27,8 @@ class PatientRegisterView(APIView):
                 username=request.data.get('username', ''),
                 password=request.data.get('password', ''),
                 type='patient',
-                adhaar=request.data.get('username', '')
+                adhaar=request.data.get('username', ''),
+                name=request.data.get('name')
             )
             token, _ = Token.objects.get_or_create(user=user)
             return Response({'token': token.key}, status=status.HTTP_201_CREATED)
@@ -44,7 +45,8 @@ class DoctorRegisterView(APIView):
                 password=request.data.get('password', ''),
                 type='doctor',
                 adhaar=request.data.get('username', ''),
-                mrn=request.data.get('mrn', '')
+                mrn=request.data.get('mrn', ''),
+                name = request.data.get('name')
             )
             token, _ = Token.objects.get_or_create(user=user)
             return Response({'token': token.key}, status=status.HTTP_201_CREATED)

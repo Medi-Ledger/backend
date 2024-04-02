@@ -4,12 +4,12 @@ from .models import User, Record, Block
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['username', 'password', 'name']
 
 class DoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'mrn', 'password']
+        fields = ['username', 'mrn', 'password', 'name']
 
 class DataUploadSerializer(serializers.ModelSerializer):
     class Meta:

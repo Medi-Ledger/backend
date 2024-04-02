@@ -10,6 +10,7 @@ class User(AbstractUser):
         ('patient', 'patient'),
     )
     email = models.EmailField(null=True, blank=True)
+    name = models.CharField(max_length=50)
     type = models.CharField(max_length=10, choices=TYPE_CHOICES, default='patient')
     adhaar = models.CharField(max_length=20, null=True, blank=True)
     mrn = models.CharField(max_length=10, null=True, blank=True)
