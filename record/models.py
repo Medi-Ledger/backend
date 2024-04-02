@@ -61,7 +61,7 @@ class Block(models.Model):
             parent = cls.objects.last()
         if parent.count != 5:
             raise Exception("Current block is not full")
-        return cls.objects.create(parent=parent.hash, current='ffffffffffffffff')
+        return cls.objects.create(parent=parent.hash, current='ffffffffffffffff', count=0)
 
     @classmethod
     def add_record(cls, record):
