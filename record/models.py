@@ -84,10 +84,10 @@ class Block(models.Model):
         self.save()
 
 
-@receiver(post_save, sender=Record)
-def create_block_if_needed(sender, instance, created, **kwargs):
-    if created:
-        Block.add_record(instance)
+# @receiver(post_save, sender=Record)
+# def create_block_if_needed(sender, instance, created, **kwargs):
+#     if created:
+#         Block.add_record(instance)
 
 '''shell script - Genesis Block
 from record.models import Block
