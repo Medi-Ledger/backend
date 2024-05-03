@@ -44,8 +44,7 @@ class DoctorRegisterView(APIView):
                 username=request.data.get('username', ''),
                 password=request.data.get('password', ''),
                 type='doctor',
-                adhaar=request.data.get('username', ''),
-                mrn=request.data.get('mrn', ''),
+                mrn=request.data.get('username', ''),
                 name = request.data.get('name')
             )
             token, _ = Token.objects.get_or_create(user=user)
