@@ -163,7 +163,7 @@ class DoctorPatientsView(APIView):
     def get(self, request):
         if request.user.type == 'doctor':
             patients = User.objects.filter(doctors__doctor=request.user)
-            patient_data = [{'id': patient.id, 'username': patient.username} for patient in patients]
+            patient_data = [{'id': patient.id, 'username': patient.username, 'name': patient.name} for patient in patients]
             return Response(patient_data, status=status.HTTP_200_OK)
         return Response({'error': 'Access denied'}, status=status.HTTP_403_FORBIDDEN)
 
