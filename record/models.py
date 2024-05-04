@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .utils import hash
+from .propagate import propagate
 
 class User(AbstractUser):
     TYPE_CHOICES = (
@@ -52,6 +53,12 @@ class Block(models.Model):
     def get_latest_block(cls):
         block = cls.objects.last()
         if block.count == 5:
+            
+            try:
+                propagate(block)
+            except:
+                print("Failed to propagate block")
+
             return cls.add_block(block)
         return block
 

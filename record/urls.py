@@ -15,4 +15,6 @@ urlpatterns = [
     path('doctor/image/', views.DoctorImageUploadView.as_view(), name='doctor-image'),
     path('doctor/file/', views.DoctorFileUploadView.as_view(), name='doctor-file'),
     path('doctor/history/', views.DoctorPatientHistoryView.as_view(), name='doctor-history'),
+    path('recieve-block/', views.RecieveBlock.as_view(), name='recieve-block'),
+    path('new-node/', views.NewNode.as_view(), name='new-node'),
 ]
