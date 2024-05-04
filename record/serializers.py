@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Record, Block
+from .models import User, Record, Block, Node
 
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,4 +44,20 @@ class DoctorImageUploadSerializer(serializers.ModelSerializer):
 class RecordDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Record
+        fields = '__all__'
+
+class BlockSerializer(serializers.ModelSerializer):
+    record1 = RecordDataSerializer()
+    record2 = RecordDataSerializer()
+    record3 = RecordDataSerializer()
+    record4 = RecordDataSerializer()
+    record5 = RecordDataSerializer()
+
+    class Meta:
+        model = Block
+        fields = '__all__'
+
+class NodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Node
         fields = '__all__'

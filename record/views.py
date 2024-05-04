@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login
-from .models import User, Diagnosis, Record
+from .models import User, Diagnosis, Record, Node
 from .serializers import (
     DoctorSerializer,
     PatientSerializer,
@@ -15,6 +15,8 @@ from .serializers import (
     DoctorFileUploadSerializer,
     DoctorImageUploadSerializer,
     RecordDataSerializer,
+    BlockSerializer,
+    NodeSerializer
 )
 
 class PatientRegisterView(APIView):
@@ -192,3 +194,16 @@ class DoctorPatientHistoryView(APIView):
         serializer = RecordDataSerializer(records, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class RecieveBlock(APIView):
+    def post(self, request):
+        serializer = BlockSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'detail': 'successfully saved new block'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors,  status=status.HTTP_400_BAD_REQUEST)
+
+class NewNode(APIView):
+    def get(self, request):
+        nodes = Node.objects.all()
+        serializer = NodeSerializer(instance=nodes, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

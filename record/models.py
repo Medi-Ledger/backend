@@ -89,6 +89,9 @@ def create_block_if_needed(sender, instance, created, **kwargs):
     if created:
         Block.add_record(instance)
 
+class Node(models.Model):
+    address = models.URLField(max_length=255)
+
 '''shell script - Genesis Block
 from record.models import Block
 block = Block.objects.create(parent='0000000000000000', hash='ffffffffffffffff')
